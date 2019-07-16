@@ -4,10 +4,14 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-            git url: 'https://github.com/jenkinsci/git-parameter-plugin.git'
+            step {
+                git url: 'https://github.com/jenkinsci/git-parameter-plugin.git'
+            }
         }
         stage('Release prepare') {
+            step {
               sh "mvn clean package"
+            }
         }
     }
 }
