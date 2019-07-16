@@ -1,16 +1,14 @@
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
+    agent { docker 'maven:3-alpine' } 
     stages {
         stage('Checkout') {
-            step {
+            steps {
                 git url: 'https://github.com/jenkinsci/git-parameter-plugin.git'
             }
         }
-        stage('Release prepare') {
-            step {
-              sh "mvn clean package"
+        stage('Example Build') {
+            steps {
+                sh 'mvn -B clean verify'
             }
         }
     }
